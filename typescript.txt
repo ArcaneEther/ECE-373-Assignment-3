@@ -1,0 +1,31 @@
+jeremy@ECE373:~/Desktop$ sudo su
+root@ECE373:/home/jeremy/Desktop# echo "0000:00:03.0" > /sys/module/e1000/drivers/pci\:e1000/unbind
+root@ECE373:/home/jeremy/Desktop# cd ECE-373/Assignment-3
+root@ECE373:/home/jeremy/Desktop/ECE-373/Assignment-3# mknod /dev/pci_device c 244 0
+root@ECE373:/home/jeremy/Desktop/ECE-373/Assignment-3# insmod pci_device.ko
+root@ECE373:/home/jeremy/Desktop/ECE-373/Assignment-3# ./test
+Initial LED Status: 602.
+Modified LED Status: 60e.
+root@ECE373:/home/jeremy/Desktop/ECE-373/Assignment-3# rmmod pci_device
+root@ECE373:/home/jeremy/Desktop/ECE-373/Assignment-3# echo "0000:00:03.0" > /sys/module/e1000/drivers/pci\:e1000/bind
+root@ECE373:/home/jeremy/Desktop/ECE-373/Assignment-3# dmesg
+[  487.564179] pci_device: loading out-of-tree module taints kernel.
+[  487.564239] pci_device: module verification failed: signature and/or required key missing - tainting kernel
+[  487.566478] pci_device loaded.
+[  487.596538] pci_device 0000:00:03.0: Initial LED Status = 0x602
+[  487.596924] Allocated 1 device/s at Major Number 244.
+[  508.427310] pci_device module opened.
+[  508.427356] LED Status sent to user: 602.
+[  508.427498] pci_device module opened.
+[  508.427513] LED Status sent to user: 60e.
+[  621.411869] pci_device unregistered.
+[  621.411871] Char device deleted.
+[  621.411872] Char device unregistered.
+[  688.791783] e1000 0000:00:03.0 eth0: (PCI:33MHz:32-bit) 52:54:00:fc:bb:b3
+[  688.791789] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
+[  688.793702] e1000 0000:00:03.0 ens3: renamed from eth0
+[  688.824920] IPv6: ADDRCONF(NETDEV_UP): ens3: link is not ready
+[  688.829511] IPv6: ADDRCONF(NETDEV_UP): ens3: link is not ready
+[  690.846652] e1000: ens3 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+[  690.847332] IPv6: ADDRCONF(NETDEV_CHANGE): ens3: link becomes ready
+root@ECE373:/home/jeremy/Desktop/ECE-373/Assignment-3# 
